@@ -18,6 +18,11 @@
         android:theme="@style/Theme.RunBurguer"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MenuDesbordante"
+            android:exported="true"
+            android:label="@string/title_activity_menu_desbordante"
+            android:theme="@style/Theme.RunBurguer.NoActionBar" />
+        <activity
             android:name=".ModificarDatosUsuario"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -60,7 +65,6 @@
             android:name=".AgregarCliente"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".AgregarPersona"
             android:exported="true"
