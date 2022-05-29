@@ -38,9 +38,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         editusuario=(EditText)findViewById(R.id.Correo);
         editpass=(EditText)findViewById(R.id.Contraseña);
-        relacion();
-        click();
-        progreso.setVisibility(View.GONE);
+
+
     }
 
 
@@ -120,24 +119,5 @@ public class Login extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    private void relacion (){
-        progreso = findViewById(R.id.cargalogin);
-        boton = findViewById(R.id.Iniciando);
-    }
-
-    private void click (){
-        boton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                iniciarsesion(view);
-                if (!cargando){
-                    progreso.setVisibility(View.VISIBLE);
-                }else{
-                    progreso.setVisibility(View.GONE);
-                }
-                cargando = !cargando;
-            }
-        });
-    }
 
 }
