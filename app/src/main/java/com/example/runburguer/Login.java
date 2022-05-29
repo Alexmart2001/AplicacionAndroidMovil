@@ -1,9 +1,12 @@
 package com.example.runburguer;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,8 +47,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void iniciarsesion (View view){
-        loginUsuario("http://"+URL.IP+"/"+URL.sitio+"/validarsesion.php?"+"usuario="+editusuario.getText().toString()+ "&contrasena="+editpass.getText().toString());
-
+        loginUsuario("http://"+URL.IP+"/"+URL.sitio+"/validarsesion.php?usuario="+editusuario.getText().toString()+ "&contrasena="+editpass.getText().toString());
     }
 
     public void loginUsuario(String URL){
@@ -56,7 +58,6 @@ public class Login extends AppCompatActivity {
                     jsonObject = (JSONObject) response.getJSONObject(i);
                     if(editusuario.getText().toString().equals(jsonObject.getString("usuario")) &&
                             editpass.getText().toString().equals(jsonObject.getString("contrasena"))){
-
                     }
                     if (perfil1.equals(jsonObject.getString("id_perfil"))) {
                         Intent j = new Intent(Login.this, MenuPrincipal.class);
@@ -86,6 +87,31 @@ public class Login extends AppCompatActivity {
         );
         requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Do you want to exit?")
+                    .setPositiveButton("si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent (Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_HOME);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.dismiss();
+                        }
+                    });
+            builder.show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

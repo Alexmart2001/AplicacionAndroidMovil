@@ -71,9 +71,12 @@
         <entry key="..\:/Users/alexa/OneDrive/Documentos/ACTIVIDADES ANDROID STUDIO/RunBurguerRober/RunBurguer2.0/app/src/main/res/layout/activity_url.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/alexa/OneDrive/Documentos/ACTIVIDADES ANDROID STUDIO/RunBurguerRober/RunBurguer2.0/app/src/main/res/layout/item_list_view.xml" value="0.1" />
         <entry key="..\:/Users/alexa/OneDrive/Documentos/ACTIVIDADES ANDROID STUDIO/RunBurguerRober/RunBurguer2.0/app/src/main/res/layout/item_list_view_productos.xml" value="0.18342391304347827" />
+        <entry key="..\:/Users/rojas/Documents/GitHub/AplicacionAndroidMovil/app/src/main/res/layout/activity_encabezado.xml" value="0.5" />
+        <entry key="..\:/Users/rojas/Documents/GitHub/AplicacionAndroidMovil/app/src/main/res/layout/activity_login.xml" value="0.2" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

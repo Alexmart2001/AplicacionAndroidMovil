@@ -1,6 +1,8 @@
 package com.example.runburguer;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +21,9 @@ Button salir;
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent j = new Intent(encabezado.this, Login.class);
+                startActivity(j);
             }
         });
-
-
-
     }
-
 }
