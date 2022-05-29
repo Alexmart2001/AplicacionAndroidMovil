@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
         logo.start();
 
     }
+    private void relaciona(){
+        bProgreso = findViewById(R.id.cargainicio);
+    }
 
 
     @Override
@@ -80,10 +83,6 @@ public class MainActivity extends AppCompatActivity {
             builder.show();
         }
         return super.onKeyDown(keyCode, event);
-
-    private void relaciona(){
-        bProgreso = findViewById(R.id.cargainicio);
-    }
 
     }
 }
