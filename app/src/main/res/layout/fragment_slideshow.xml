@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.slideshow.SlideshowFragment">
 
+    <TextView
+        android:id="@+id/textView03"
+        android:layout_width="388dp"
+        android:layout_height="605dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
+        android:textColor="#F34D4D"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
