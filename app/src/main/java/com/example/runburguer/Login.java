@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,20 +23,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
-    TextView nusu;
-    String nom,ape;
     EditText editusuario, editpass;
     String perfil1 ="1";
     String perfil2 ="2";
     RequestQueue requestQueue;
+    private ProgressBar progreso;
+    private Button boton;
+    private Boolean cargando = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         editusuario=(EditText)findViewById(R.id.Correo);
         editpass=(EditText)findViewById(R.id.Contraseña);
+        relacion();
+        click();
+        progreso.setVisibility(View.GONE);
     }
 
 
@@ -112,6 +118,26 @@ public class Login extends AppCompatActivity {
             builder.show();
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void relacion (){
+        progreso = findViewById(R.id.cargalogin);
+        boton = findViewById(R.id.Iniciando);
+    }
+
+    private void click (){
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iniciarsesion(view);
+                if (!cargando){
+                    progreso.setVisibility(View.VISIBLE);
+                }else{
+                    progreso.setVisibility(View.GONE);
+                }
+                cargando = !cargando;
+            }
+        });
     }
 
 }
