@@ -55,11 +55,11 @@ public class ModificarVenta extends AppCompatActivity {
         String medpag = getIntent().getStringExtra("medio_de_pago");
         mediodepago.setText("" + medpag);
 
-        String email = getIntent().getStringExtra("productos_id_producto");
-        idestablecimiento.setText("" + email);
+        String email = getIntent().getStringExtra("nombre_producto");
+        idproductos.setText("" + email);
 
-        String email1 = getIntent().getStringExtra("usuarios_id_usuario");
-        idestablecimiento.setText("" + email1);
+        String email1 = getIntent().getStringExtra("nombre");
+        idusuarios.setText("" + email1);
 
         String email2 = getIntent().getStringExtra("establecimiento_id_establecimiento");
         idestablecimiento.setText("" + email2);
@@ -67,7 +67,11 @@ public class ModificarVenta extends AppCompatActivity {
     }
 
     public void navAtras(View view) {
-        Intent i = new Intent(this, GestionProductos.class);
+        Intent i = new Intent(this, GestionVentas.class);
+        String nombre = getIntent().getExtras().getString("nombre");
+        String apellido = getIntent().getExtras().getString("apellido");
+        i.putExtra("nombre", nombre);
+        i.putExtra("apellido", apellido);
         startActivity(i);
 
     }
@@ -80,7 +84,7 @@ public class ModificarVenta extends AppCompatActivity {
                 .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ejecutarDatos("http://" + URL.IP + "/" + URL.sitio + "/" + "modificarproducto.php"
+                        ejecutarDatos("http://" + URL.IP + "/" + URL.sitio + "/" + "modificarventa.php"
                         );
                     }
                 })
@@ -111,10 +115,10 @@ public class ModificarVenta extends AppCompatActivity {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("id_venta", idventa.getText().toString());
                 parametros.put("fecha_venta", fechaventa.getText().toString());
-                parametros.put("cantidad_vedida", cantidadvendida.getText().toString());
+                parametros.put("cantidad_vendida", cantidadvendida.getText().toString());
                 parametros.put("medio_de_pago", mediodepago.getText().toString());
                 parametros.put("productos_id_producto", idproductos.getText().toString());
-                parametros.put("usuarios_id_usuario", idusuarios.getText().toString());
+                parametros.put("usuario_id_usuario", idusuarios.getText().toString());
                 parametros.put("establecimiento_id_establecimiento", idestablecimiento.getText().toString());
                 return parametros;
             }

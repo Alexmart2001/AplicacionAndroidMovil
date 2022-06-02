@@ -63,10 +63,13 @@ public class ModificarProducto extends AppCompatActivity {
 
     public void navAtras(View view) {
         Intent i = new Intent(this, GestionProductos.class);
+        String nombre = getIntent().getExtras().getString("nombre");
+        String apellido = getIntent().getExtras().getString("apellido");
+        i.putExtra("nombre", nombre);
+        i.putExtra("apellido", apellido);
         startActivity(i);
 
     }
-
     public void modif(View view) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ModificarProducto.this, R.style.Theme_Material3_Dark_Dialog_Alert);

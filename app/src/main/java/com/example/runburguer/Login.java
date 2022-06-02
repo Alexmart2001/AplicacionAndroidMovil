@@ -60,16 +60,13 @@ public class Login extends AppCompatActivity {
     public void iniciarsesion (View view){
         bProgreso.setVisibility(View.VISIBLE);
         Thread logo = new Thread() {
-
             public void run() {
                 try {
                     int tiempo = 0;
-                    while (tiempo < 3000) {
+                    while (tiempo < 2000) {
                         sleep(100);
                         tiempo = tiempo + 100;
-
                     }
-
                     loginUsuario("http://"+URL.IP+"/"+URL.sitio+"/validarsesion.php?usuario="+editusuario.getText().toString()+ "&contrasena="+editpass.getText().toString());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -130,15 +127,8 @@ public class Login extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==event.KEYCODE_BACK){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("¿deseas salir?")
-                    .setPositiveButton("si", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                         Login.super.onDestroy();
-                         android.os.Process.killProcess(android.os.Process.myPid());
-                        }
-                    })
-                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            builder.setMessage("No puede retroceder")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int i) {
                             dialog.dismiss();

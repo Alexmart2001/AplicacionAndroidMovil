@@ -40,37 +40,84 @@ public class GestionVentas extends AppCompatActivity {
         ejecutarURL();
         svSearch = (EditText) findViewById(R.id.svSearch);
 
+    }
+
+    public void ejecutarURL(){
+
+        listaVenta("http://"+URL.IP+"/"+URL.sitio+"/"+"listarventas.php");
+    }
+
+    public void buscar(View view) {
+        buscarproductos("http://"+URL.IP+"/"+URL.sitio+"/"+"buscarventa.php?fecha_venta="+svSearch.getText().toString()+"");
+        if(svSearch.getText().toString().equals("")){
+            recreate();
         }
 
-        public void ejecutarURL(){
+    }
 
-            listaVenta("http://"+URL.IP+"/"+URL.sitio+"/"+"listarventas.php");
-        }
-
-        public void buscar(View view) {
-            buscarproductos("http://"+URL.IP+"/"+URL.sitio+"/"+"buscarventa.php?fecha_venta="+svSearch.getText().toString()+"");
-            if(svSearch.getText().toString().equals("")){
-                recreate();
+    public void mostrar() {
+        Adapterlistventas adapter=new Adapterlistventas(this,elementoid,elementos,elementos1,elementos2,elementos3,elementos4,elementos5);
+        ListView lista = (ListView) findViewById(R.id.rvLista1);
+        lista.setAdapter(adapter);
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                //Al hacer click en cualquiera de los elementos de la lista
             }
+        });
 
-        }
+    }
 
-        public void mostrar() {
-            Adapterlistventas adapter=new Adapterlistventas(this,elementoid,elementos,elementos1,elementos2,elementos3,elementos4,elementos5);
-            ListView lista = (ListView) findViewById(R.id.rvLista1);
-            lista.setAdapter(adapter);
-            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-                {
-                    //Al hacer click en cualquiera de los elementos de la lista
+    public void listaVenta(String URL){
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, response -> {
+            JSONObject jsonObject;
+            elementoid = new String[response.length()];
+            elementos = new String[response.length()];
+            elementos1 = new String[response.length()];
+            elementos2 = new String[response.length()];
+            elementos3 = new String[response.length()];
+            elementos4 = new String[response.length()];
+            elementos5 = new String[response.length()];
+
+            for (int i = 0; i < response.length(); i++) {
+                try {
+                    jsonObject = response.getJSONObject(i);
+                    idventa = jsonObject.getString("id_venta");
+                    fechaventa = jsonObject.getString("fecha_venta");
+                    cantidadvendida = jsonObject.getString("cantidad_vendida");
+                    mediodepago = jsonObject.getString("medio_de_pago");
+                    idproducto = jsonObject.getString("nombre_producto");
+                    idusuario = jsonObject.getString("nombre");
+                    idestablecimiento = jsonObject.getString("nombre_establecimiento");
+
+
+                    elementoid[i] =""+idventa;
+                    elementos[i] =""+fechaventa;
+                    elementos1[i] =""+cantidadvendida;
+                    elementos2[i] =""+mediodepago;
+                    elementos3[i] =""+idproducto;
+                    elementos4[i] =""+idusuario;
+                    elementos5[i] =""+idestablecimiento;
+
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(),
+                            e.getMessage(),Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+            mostrar();
+        }, error -> Toast.makeText(getApplicationContext(), "ERROR DE CONEXION",
+                Toast.LENGTH_SHORT).show()
+        );
+        requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonArrayRequest);
+    }
 
-        }
 
-        public void listaVenta(String URL){
-            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, response -> {
+    public void buscarproductos(String URL) {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
                 JSONObject jsonObject;
                 elementoid = new String[response.length()];
                 elementos = new String[response.length()];
@@ -97,89 +144,43 @@ public class GestionVentas extends AppCompatActivity {
                         elementos1[i] =""+cantidadvendida;
                         elementos2[i] =""+mediodepago;
                         elementos3[i] =""+idproducto;
-                        elementos4[i] =""+idestablecimiento;
+                        elementos4[i] =""+idusuario;
                         elementos5[i] =""+idestablecimiento;
 
                     } catch (JSONException e) {
                         Toast.makeText(getApplicationContext(),
                                 e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
-                }
-                mostrar();
-            }, error -> Toast.makeText(getApplicationContext(), "ERROR DE CONEXION",
-                    Toast.LENGTH_SHORT).show()
-            );
-            requestQueue = Volley.newRequestQueue(this);
-            requestQueue.add(jsonArrayRequest);
-        }
-
-
-        public void buscarproductos(String URL) {
-            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {
-                    JSONObject jsonObject;
-                    elementoid = new String[response.length()];
-                    elementos = new String[response.length()];
-                    elementos1 = new String[response.length()];
-                    elementos2 = new String[response.length()];
-                    elementos3 = new String[response.length()];
-                    elementos4 = new String[response.length()];
-                    elementos5 = new String[response.length()];
-
-                    for (int i = 0; i < response.length(); i++) {
-                        try {
-                            jsonObject = response.getJSONObject(i);
-                            idventa = jsonObject.getString("id_venta");
-                            fechaventa = jsonObject.getString("fecha_venta");
-                            cantidadvendida = jsonObject.getString("cantidad_vendida");
-                            mediodepago = jsonObject.getString("medio_de_pago");
-                            idproducto = jsonObject.getString("nombre_producto");
-                            idusuario = jsonObject.getString("nombre");
-                            idestablecimiento = jsonObject.getString("nombre_establecimiento");
-
-
-                            elementoid[i] =""+idventa;
-                            elementos[i] =""+fechaventa;
-                            elementos1[i] =""+cantidadvendida;
-                            elementos2[i] =""+mediodepago;
-                            elementos3[i] =""+idproducto;
-                            elementos4[i] =""+idestablecimiento;
-                            elementos5[i] =""+idestablecimiento;
-
-                        } catch (JSONException e) {
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                        mostrar();
-                    }
-
-                    Toast.makeText(getApplicationContext(), "se encontro el dato", Toast.LENGTH_SHORT).show();
-
+                    mostrar();
                 }
 
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "No se encontró el dato", Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(getApplicationContext(), "se encontro el dato", Toast.LENGTH_SHORT).show();
 
             }
 
-            );
-
-            requestQueue = Volley.newRequestQueue(this);
-            requestQueue.add(jsonArrayRequest);
-
-
-        }
-
-        public void navagregar (View view){
-
-            Intent in;
-            in = new Intent(GestionVentas.this, AgregarVenta.class);
-            startActivity(in);
-            Toast.makeText(getApplicationContext(),"PASA A AGREGAR PRODUCTO", Toast.LENGTH_SHORT).show();
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "No se encontró el dato", Toast.LENGTH_SHORT).show();
+            }
 
         }
+
+        );
+
+        requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonArrayRequest);
+
 
     }
+
+    public void navagregar (View view){
+
+        Intent in;
+        in = new Intent(GestionVentas.this, AgregarVenta.class);
+        startActivity(in);
+        Toast.makeText(getApplicationContext(),"PASA A AGREGAR PRODUCTO", Toast.LENGTH_SHORT).show();
+
+    }
+
+}

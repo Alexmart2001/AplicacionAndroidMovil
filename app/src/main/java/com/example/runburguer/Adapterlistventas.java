@@ -90,8 +90,8 @@ public class Adapterlistventas extends ArrayAdapter<String> {
                     var.putExtra("fecha_venta", ""+fechaventa.getText().toString());
                     var.putExtra("cantidad_vendida", ""+cantidadvendida.getText().toString());
                     var.putExtra("medio_de_pago", ""+mediodepago.getText().toString());
-                    var.putExtra("productos_id_producto", ""+producto.getText().toString());
-                    var.putExtra("usuarios_id_usuario", ""+usuario.getText().toString());
+                    var.putExtra("nombre_producto", ""+producto.getText().toString());
+                    var.putExtra("nombre", ""+usuario.getText().toString());
                     var.putExtra("establecimiento_id_establecimiento", ""+establecimiento.getText().toString());
 
 
