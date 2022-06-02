@@ -18,10 +18,13 @@
         android:theme="@style/Theme.RunBurguer"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MenuDesbordante"
+            android:name=".Item2"
             android:exported="true"
-            android:label="@string/title_activity_menu_desbordante"
-            android:theme="@style/Theme.RunBurguer.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".Item1"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".ModificarDatosUsuario"
             android:exported="true"
@@ -99,8 +102,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MenuAdmin"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="true" />
         <activity
             android:name=".Seguimiento"
             android:exported="true"
@@ -127,8 +129,8 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MenuPrincipal"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="true" />
+
         <activity
             android:name=".Login"
             android:exported="true"

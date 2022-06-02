@@ -10,20 +10,14 @@ import android.widget.Button;
 
 public class encabezado extends AppCompatActivity {
 
-
-Button salir;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encabezado);
-        salir =(Button) findViewById(R.id.button4);
-        salir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent j = new Intent(encabezado.this, Login.class);
-                startActivity(j);
-            }
-        });
+
     }
+
+
+
+
 }

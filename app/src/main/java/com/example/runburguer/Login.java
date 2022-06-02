@@ -30,6 +30,7 @@ public class Login extends AppCompatActivity {
     private ProgressBar progreso;
     private Button boton;
     private Boolean cargando = false;
+    private ProgressBar bProgreso;
 
 
     @Override
@@ -38,9 +39,14 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         editusuario=(EditText)findViewById(R.id.Correo);
         editpass=(EditText)findViewById(R.id.Contraseña);
+        bProgreso = findViewById(R.id.progressBar);
+
 
 
     }
+
+
+
 
 
 
@@ -52,8 +58,34 @@ public class Login extends AppCompatActivity {
     }
 
     public void iniciarsesion (View view){
-        loginUsuario("http://"+URL.IP+"/"+URL.sitio+"/validarsesion.php?usuario="+editusuario.getText().toString()+ "&contrasena="+editpass.getText().toString());
+        bProgreso.setVisibility(View.VISIBLE);
+        Thread logo = new Thread() {
+
+            public void run() {
+                try {
+                    int tiempo = 0;
+                    while (tiempo < 3000) {
+                        sleep(100);
+                        tiempo = tiempo + 100;
+
+                    }
+
+                    loginUsuario("http://"+URL.IP+"/"+URL.sitio+"/validarsesion.php?usuario="+editusuario.getText().toString()+ "&contrasena="+editpass.getText().toString());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    finish();
+                }
+            }
+        };
+
+        logo.start();
+
     }
+
+
+
+
 
     public void loginUsuario(String URL){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, response -> {
@@ -98,14 +130,12 @@ public class Login extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==event.KEYCODE_BACK){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Do you want to exit?")
+            builder.setMessage("¿deseas salir?")
                     .setPositiveButton("si", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent (Intent.ACTION_MAIN);
-                            intent.addCategory(Intent.CATEGORY_HOME);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
+                         Login.super.onDestroy();
+                         android.os.Process.killProcess(android.os.Process.myPid());
                         }
                     })
                     .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

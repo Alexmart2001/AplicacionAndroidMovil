@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -155,7 +157,7 @@ public class MenuPrincipal extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==event.KEYCODE_BACK){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Do you want to exit?")
+            builder.setMessage("¿Deseas salir?")
                     .setPositiveButton("si", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -175,4 +177,25 @@ public class MenuPrincipal extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.Item1) {
+            Intent j = new Intent(MenuPrincipal.this, Item1.class);
+            startActivity(j);
+        } else if (id == R.id.Item2) {
+            Intent j = new Intent(MenuPrincipal.this, Item2.class);
+            startActivity(j);
+        } else if (id == R.id.Item3) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
+
